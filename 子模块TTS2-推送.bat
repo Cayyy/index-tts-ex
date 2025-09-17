@@ -45,23 +45,30 @@ if errorlevel 1 (
     echo 主项目记录提交: %recorded_commit%
     echo.
     
-    echo 更新内容摘要:
-    cd index-tts
-    git log --oneline %recorded_commit%..%current_commit%
-    cd ..
-    echo.
-    
-    echo 详细更新日志:
-    cd index-tts
-    git log --pretty=format:"%%h - %%an, %%ar : %%s" %recorded_commit%..%current_commit%
-    cd ..
-    echo.
-    
-    echo 更新统计:
-    cd index-tts
-    git diff --stat %recorded_commit%..%current_commit%
-    cd ..
-    echo.
+    REM 检查是否有更新
+    if not "%current_commit%"=="%recorded_commit%" (
+        echo 更新内容摘要:
+        cd index-tts
+        git log --oneline %recorded_commit%..%current_commit%
+        cd ..
+        echo.
+        
+        echo 详细更新日志:
+        cd index-tts
+        git log --pretty=format:"%%h - %%an, %%ar : %%s" %recorded_commit%..%current_commit%
+        cd ..
+        echo.
+        
+        echo 更新统计:
+        cd index-tts
+        git diff --stat %recorded_commit%..%current_commit%
+        cd ..
+        echo.
+    ) else (
+        echo ℹ️  子模块已是最新版本，无需推送
+        pause
+        exit /b 0
+    )
     
     set /p confirm="是否要提交并推送这些更新？(y/n): "
     if /i not "%confirm%"=="y" (

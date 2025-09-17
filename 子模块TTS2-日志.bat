@@ -53,27 +53,18 @@ if not "%current_commit%"=="%recorded_commit%" (
     git diff --stat %recorded_commit%..%current_commit%
     cd ..
     echo.
-    
-    echo ========================================
-    echo    最近 10 次提交
-    echo ========================================
-    cd index-tts
-    git log --oneline -10
-    cd ..
-    echo.
-    
 ) else (
     echo ℹ️  子模块已是最新版本，无需更新
     echo.
-    
-    echo ========================================
-    echo    最近 10 次提交
-    echo ========================================
-    cd index-tts
-    git log --oneline -10
-    cd ..
-    echo.
 )
+
+echo ========================================
+echo    最近 10 次提交
+echo ========================================
+cd index-tts
+git log --oneline -10
+cd ..
+echo.
 
 echo ========================================
 echo    子模块状态

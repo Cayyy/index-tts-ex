@@ -16,6 +16,15 @@ if not exist "index-tts" (
 ) else (
     echo 子模块已存在，正在更新...
     echo.
+    
+    REM 获取更新前的子模块提交哈希
+    cd index-tts
+    for /f "tokens=1" %%i in ('git rev-parse HEAD') do set "old_commit=%%i"
+    cd ..
+    
+    echo 更新前子模块提交: %old_commit%
+    echo.
+    
     echo 1. 更新子模块到最新版本...
     git submodule update --remote --merge
     
@@ -38,37 +47,34 @@ echo    子模块更新日志
 echo ========================================
 echo.
 
-REM 获取当前子模块的提交哈希
+REM 获取更新后的子模块提交哈希
 cd index-tts
-for /f "tokens=1" %%i in ('git rev-parse HEAD') do set "current_commit=%%i"
+for /f "tokens=1" %%i in ('git rev-parse HEAD') do set "new_commit=%%i"
 cd ..
 
-REM 获取主项目中记录的子模块提交哈希
-for /f "tokens=1" %%i in ('git ls-tree HEAD index-tts') do set "recorded_commit=%%i"
-
-echo 当前子模块提交: %current_commit%
-echo 主项目记录提交: %recorded_commit%
+echo 更新前子模块提交: %old_commit%
+echo 更新后子模块提交: %new_commit%
 echo.
 
 REM 检查是否有更新
-if not "%current_commit%"=="%recorded_commit%" (
-    echo ✅ 发现子模块更新！
+if not "%old_commit%"=="%new_commit%" (
+    echo ✅ 子模块已成功更新！
     echo.
     echo 更新内容摘要:
     cd index-tts
-    git log --oneline %recorded_commit%..%current_commit%
+    git log --oneline %old_commit%..%new_commit%
     cd ..
     echo.
     
     echo 详细更新日志:
     cd index-tts
-    git log --pretty=format:"%%h - %%an, %%ar : %%s" %recorded_commit%..%current_commit%
+    git log --pretty=format:"%%h - %%an, %%ar : %%s" %old_commit%..%new_commit%
     cd ..
     echo.
     
     echo 更新统计:
     cd index-tts
-    git diff --stat %recorded_commit%..%current_commit%
+    git diff --stat %old_commit%..%new_commit%
     cd ..
     echo.
 ) else (
