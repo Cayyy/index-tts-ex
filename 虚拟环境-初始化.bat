@@ -10,9 +10,16 @@ where conda >nul 2>nul
 if errorlevel 1 (
     echo 错误: 未找到 conda，请先安装 Anaconda 或 Miniconda
     echo.
-    echo 下载地址:
-    echo   Anaconda: https://www.anaconda.com/download
-    echo   Miniconda: https://docs.conda.io/en/latest/miniconda.html
+    echo 下载连接: https://www.anaconda.com/download
+    echo.
+    echo 配置环境变量
+    echo.
+    echo ANACONDA_PATH：安装路径
+    echo.
+    echo PATH：
+    echo    %%ANACONDA_PATH%%\Scripts
+    echo    %%ANACONDA_PATH%%\condabin
+    echo    %%ANACONDA_PATH%%\Library\bin
     echo.
     pause
     exit /b 1
