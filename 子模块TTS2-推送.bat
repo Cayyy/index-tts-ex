@@ -29,11 +29,52 @@ echo.
 echo 正在检查是否有子模块更新...
 git diff --quiet .gitmodules index-tts
 if errorlevel 1 (
-    echo 发现子模块更新，正在提交...
+    echo ✅ 发现子模块更新！
+    echo.
+    
+    REM 获取当前子模块的提交哈希
+    cd index-tts
+    for /f "tokens=1" %%i in ('git rev-parse HEAD') do set "current_commit=%%i"
+    cd ..
+    
+    REM 获取主项目中记录的子模块提交哈希
+    for /f "tokens=1" %%i in ('git ls-tree HEAD index-tts') do set "recorded_commit=%%i"
+    
+    echo 更新详情:
+    echo 当前子模块提交: %current_commit%
+    echo 主项目记录提交: %recorded_commit%
+    echo.
+    
+    echo 更新内容摘要:
+    cd index-tts
+    git log --oneline %recorded_commit%..%current_commit%
+    cd ..
+    echo.
+    
+    echo 详细更新日志:
+    cd index-tts
+    git log --pretty=format:"%%h - %%an, %%ar : %%s" %recorded_commit%..%current_commit%
+    cd ..
+    echo.
+    
+    echo 更新统计:
+    cd index-tts
+    git diff --stat %recorded_commit%..%current_commit%
+    cd ..
+    echo.
+    
+    set /p confirm="是否要提交并推送这些更新？(y/n): "
+    if /i not "%confirm%"=="y" (
+        echo 取消推送
+        pause
+        exit /b 0
+    )
+    
+    echo 正在提交...
     
     REM 获取子模块的最新提交信息
     cd index-tts
-    set "submodule_commit=%%(git log -1 --pretty=format:"%%h %%s")"
+    for /f "tokens=*" %%i in ('git log -1 --pretty=format:"%%h %%s"') do set "submodule_commit=%%i"
     cd ..
     
     REM 提交子模块更新
