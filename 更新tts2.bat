@@ -37,4 +37,16 @@ echo   config.yaml bigvgan_discriminator.pth bigvgan_generator.pth ^
 echo   bpe.model dvae.pth gpt.pth unigram_12000.vocab ^
 echo   --local-dir index-tts/checkpoints
 echo.
+echo 是否要推送子模块更新到远程仓库？
+set /p push_choice="输入 y 推送，其他键跳过: "
+
+if /i "%push_choice%"=="y" (
+    echo.
+    echo 正在推送子模块更新...
+    call "推送子模块TTS2.bat"
+) else (
+    echo 跳过推送，您可以稍后运行 推送子模块TTS2.bat 来推送更新
+)
+
+echo.
 pause

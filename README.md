@@ -26,6 +26,8 @@ index-tts2/
 │   │   └── text_utils.py         # 文本工具
 │   └── tests/                    # 测试文件
 ├── 更新tts2.bat                  # 更新 TTS 仓库脚本
+├── 推送子模块TTS2.bat            # 推送子模块更新
+├── 检查并推送TTS2.bat            # 检查并推送子模块更新
 ├── 启动.bat                      # 启动二次开发项目
 ├── 启动TTS2.bat                  # 启动原始 TTS2 项目
 ├── setup_env.bat                 # 环境设置脚本
@@ -86,7 +88,20 @@ huggingface-cli download IndexTeam/IndexTTS-1.5 \
   --local-dir index-tts/checkpoints
 ```
 
-### 5. 启动项目
+### 5. 子模块管理
+
+```bash
+# 更新子模块
+更新tts2.bat
+
+# 检查并推送子模块更新
+检查并推送TTS2.bat
+
+# 仅推送子模块更新（需要先更新）
+推送子模块TTS2.bat
+```
+
+### 6. 启动项目
 
 #### 启动二次开发项目
 ```bash
