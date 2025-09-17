@@ -25,9 +25,10 @@ index-tts2/
 │   │   ├── file_utils.py         # 文件工具
 │   │   └── text_utils.py         # 文本工具
 │   └── tests/                    # 测试文件
+├── 虚拟环境-初始化.bat            # 虚拟环境初始化
 ├── 子模块TTS2-更新.bat            # 更新子模块
 ├── 子模块TTS2-推送.bat            # 推送子模块更新
-├── 子模块TTS2-日志.bat            # 查看子模块更新日志
+├── 子模块TTS2-启动.bat            # 启动项目
 ├── 启动.bat                      # 启动二次开发项目
 ├── 启动TTS2.bat                  # 启动原始 TTS2 项目
 ├── setup_env.bat                 # 环境设置脚本
@@ -57,13 +58,19 @@ cd index-tts2
 
 ### 3. 环境设置
 
-#### 方法一：使用批处理脚本（推荐）
+#### 方法一：使用虚拟环境初始化脚本（推荐）
+```bash
+# Windows
+虚拟环境-初始化.bat
+```
+
+#### 方法二：使用批处理脚本
 ```bash
 # Windows
 setup_env.bat
 ```
 
-#### 方法二：手动设置
+#### 方法三：手动设置
 ```bash
 # 创建 conda 环境
 conda env create -f environment.yml
