@@ -1,0 +1,27 @@
+name: index-tts-dev
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+dependencies:
+  - python=3.10
+  - pip
+  - ffmpeg
+  - cudatoolkit=11.8
+  - pip:
+    - torch==2.1.0+cu118
+    - torchaudio==2.1.0+cu118
+    - torchvision==0.16.0+cu118
+    - numpy
+    - scipy
+    - librosa
+    - soundfile
+    - transformers
+    - accelerate
+    - datasets
+    - wandb
+    - tensorboard
+    - matplotlib
+    - seaborn
+    - jupyter
+    - ipykernel

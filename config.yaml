@@ -1,0 +1,47 @@
+# IndexTTS 二次开发项目配置文件
+
+project:
+  name: "IndexTTS-Dev"
+  version: "1.0.0"
+  debug: true
+
+tts:
+  model_dir: "index-tts/checkpoints"
+  config_path: "index-tts/checkpoints/config.yaml"
+  use_v2: true
+  use_fp16: false
+  use_cuda_kernel: false
+  use_deepspeed: false
+
+audio:
+  sample_rate: 22050
+  output_dir: "outputs"
+  max_duration: 300  # 最大时长（秒）
+  normalize: true
+
+api:
+  host: "127.0.0.1"
+  port: 8000
+  workers: 1
+
+web:
+  host: "127.0.0.1"
+  port: 7860
+  share: false
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/app.log"
+
+# 情感控制配置
+emotion:
+  default_alpha: 0.6
+  supported_emotions: ["happy", "angry", "sad", "afraid", "disgusted", "melancholic", "surprised", "calm"]
+  
+# 文本处理配置
+text:
+  max_length: 1000
+  min_length: 1
+  auto_split: true
+  split_length: 500

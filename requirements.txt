@@ -1,0 +1,31 @@
+# IndexTTS 二次开发项目依赖
+# 基础依赖
+torch==2.1.0+cu118
+torchaudio==2.1.0+cu118
+torchvision==0.16.0+cu118
+numpy
+scipy
+librosa
+soundfile
+transformers
+accelerate
+datasets
+wandb
+tensorboard
+matplotlib
+seaborn
+jupyter
+ipykernel
+
+# 开发工具
+pytest
+black
+flake8
+mypy
+pre-commit
+
+# 可选依赖
+fastapi
+uvicorn
+gradio
+streamlit
